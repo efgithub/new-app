@@ -70,6 +70,18 @@ return [
             ]) : [],
         ],
 
+        'mysql_efeng' => [
+            'driver' => 'mysql',
+            'host' => '192.168.1.204',
+            'port' => '3306',
+            'database' => 'efeng',
+            'username' => env('DB_MASTER_USERNAME', 'root'), // 請在 .env 設定正確帳密
+            'password' => env('DB_MASTER_PASSWORD', '@7o5989BB'),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'engine' => null,
+],
         'mariadb' => [
             'driver' => 'mariadb',
             'url' => env('DB_URL'),

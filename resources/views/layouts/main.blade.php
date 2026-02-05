@@ -10,7 +10,7 @@
     <header style="background: #f4f4f4; padding: 20px;">
         <h1>我的品牌 LOGO</h1>
         <nav>
-            <a href="/">首頁</a> | <a href="/about">關於我們</a>
+            <a href="/">首頁</a> | <a href="/efeng">易鋒入口網</a> | <a href="/about">關於我們</a>
         </nav>
     </header>
 
