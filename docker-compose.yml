@@ -1,7 +1,8 @@
 services:
   # PHP 應用程式容器
   app:
-    image: php:8.4-fpm
+    #image: php:8.4-fpm
+    build: .
     container_name: new-app-php
     restart: unless-stopped
     working_dir: /var/www
