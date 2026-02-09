@@ -1,7 +1,9 @@
 services:
   # PHP 應用程式容器
   app:
-    image: php:8.4-fpm
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: new-app-php
     restart: unless-stopped
     working_dir: /var/www
@@ -32,13 +34,28 @@ services:
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: itadmin_db
-      MYSQL_ROOT_PASSWORD: root_password_123
+      MYSQL_ROOT_PASSWORD: "@7o5989BB"
     ports:
       - "3306:3306"
     volumes:
       - dbdata:/var/lib/mysql
     networks:
       - itadmin-net
+
+  # MySQL 管理工具 (phpMyAdmin)
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: new-app-pma
+    restart: unless-stopped
+    ports:
+      - "8081:80" # ★ 注意：改成 8081，避免跟 Web 的 8080 衝突
+    environment:
+      PMA_HOST: db # 預設連線到本機的 db 容器
+      PMA_ARBITRARY: 1 # ★ 關鍵：允許輸入「其他伺服器 IP」(如 192.168.1.204)
+    networks:
+      - itadmin-net # ★ 必須跟其他服務在同一個網路
+    depends_on:
+      - db
 
 networks:
   itadmin-net:

@@ -48,7 +48,7 @@
                     <tr>
                         <td>{{ $item->exworktype }}-{{ $item->orderno }}</td>
                         <td></td>
-                        <td>{{ !empty($item->exthird) ? date("m-d-'y", strtotime($item->exfirst)) : '' }}</td>
+                        <td>{{ !empty($item->exfirst) ? date("m-d-'y", strtotime($item->exfirst)) : '' }}</td>
                         <td>{{ !empty($item->exsecond) ? date("m-d-'y", strtotime($item->exsecond)) : '' }}</td>
                         <td>{{ !empty($item->exthird) ? date("m-d-'y", strtotime($item->exthird)) : '' }}</td>
                     </tr>

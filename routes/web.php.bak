@@ -1,0 +1,29 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ExworkController;
+
+// 1. 顯示登入頁 (GET)
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+
+// 2. 送出登入資料 (POST)
+Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
+
+// 3. 測試用：登入後才能看到的儀表板
+Route::get('/dashboard', function () {
+    return '<h1>登入成功！</h1> <p>歡迎回來，' . Auth::user()->username . '</p>';
+})->middleware('auth');
+
+Route::get('/', function () {
+    return view('index');
+});
+
+Route::get('/efeng', function () {
+    return view('efeng.index');
+});
+
+Route::get('/efeng/exwork', [ExworkController::class, 'index']);
+
+Route::get('/about',function () {
+    return view('about');
+});

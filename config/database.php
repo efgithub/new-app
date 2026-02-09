@@ -37,51 +37,38 @@ return [
             'database' => env('DB_DATABASE', database_path('database.sqlite')),
             'prefix' => '',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
-            'busy_timeout' => null,
-            'journal_mode' => null,
-            'synchronous' => null,
-            'transaction_mode' => 'DEFERRED',
         ],
 
-        'mysql_remote' => [
+        // ==========================================================
+        // 1. 本機連線 (存管理員帳號)
+        // ==========================================================
+        'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_REMOTE_HOST'),
-            'port' => env('DB_REMOTE_PORT'),
-            'database' => env('DB_REMOTE_DATABASE'),
-        ],
-
-        'mysql_local' => [
-            'driver' => 'mysql',
-            'url' => env('DB_LOCAL_URL'),
-            'host' => env('DB_LOCAL_HOST', '127.0.0.1'),
-            'port' => env('DB_LOCAL_PORT', '3306'),
-            'database' => env('DB_LOCAL_DATABASE', 'laravel'),
-            'username' => env('DB_LOCAL_USERNAME', 'root'),
-            'password' => env('DB_LOCAL_PASSWORD', ''),
-            'unix_socket' => env('DB_LOCAL_SOCKET', ''),
-            'charset' => env('DB_LOCAL_CHARSET', 'utf8mb4'),
-            'collation' => env('DB_LOCAL_COLLATION', 'utf8mb4_unicode_ci'),
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'strict' => true,
-            'engine' => null,
-            'options' => extension_loaded('pdo_mysql') ? array_filter([
-                (PHP_VERSION_ID >= 80500 ? \Pdo\Mysql::ATTR_SSL_CA : \PDO::MYSQL_ATTR_SSL_CA) => env('MYSQL_ATTR_SSL_CA'),
-            ]) : [],
-        ],
-
-        'mysql_efeng' => [
-            'driver' => 'mysql',
-            'host' => '192.168.1.204',
-            'port' => '3306',
-            'database' => 'efeng',
-            'username' => env('DB_MASTER_USERNAME', 'root'), // 請在 .env 設定正確帳密
-            'password' => env('DB_MASTER_PASSWORD', '@7o5989BB'),
+            'host' => env('DB_HOST', '127.0.0.1'),      // 自動讀取 .env 的 db (本機)
+            'database' => env('DB_DATABASE', 'forge'),  // 自動讀取 .env 的 itadmin_db
+            'username' => env('DB_USERNAME', 'forge'),
+            'password' => env('DB_PASSWORD', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
-            'engine' => null,
-],
+            'strict' => true,
+        ],
+
+        // ==========================================================
+        // 2. 遠端連線 (存 AAP 資料)
+        // ==========================================================
+        'mysql_remote' => [
+            'driver' => 'mysql',
+            'host' => env('DB_REMOTE_HOST', '127.0.0.1'),         // 自動讀取 .env 的 192.168.1.204
+            'database' => env('DB_REMOTE_DATABASE', 'forge'),     // 自動讀取 .env 的 efeng
+            'username' => env('DB_REMOTE_USERNAME', 'forge'),     // 自動讀取 .env 的帳號
+            'password' => env('DB_REMOTE_PASSWORD', ''),          // 自動讀取 .env 的密碼
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+        ],
+
         'mariadb' => [
             'driver' => 'mariadb',
             'url' => env('DB_URL'),

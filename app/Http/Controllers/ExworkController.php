@@ -11,7 +11,7 @@ class ExworkController extends Controller
     public function index()
     {
         // 抓取 204 的 efeng 資料庫
-        $data = DB::connection('mysql_efeng')
+        $data = DB::connection('mysql_remote')
                   ->table('exwork')
                   ->select('id', 'exworktype', 'orderno', 'exfirst', 'exsecond', 'exthird')
                   ->orderBy('id', 'desc')
