@@ -45,7 +45,10 @@ Route::middleware('auth')->group(function () {
         return view('efeng.index');
     });
 
-    Route::get('/efeng/exwork', [ExworkController::class, 'index']);
+    // ▼▼▼ 修正重點在這裡 ▼▼▼
+    // 加上 ->name('exwork.index')，這樣 Blade 裡的 route('exwork.index') 才找得到它
+    Route::get('/efeng/exwork', [ExworkController::class, 'index'])->name('exwork.index');
+    //Route::get('/efeng/exwork', [ExworkController::class, 'index']);
 
     // ★ 登出功能 (務必加上，不然進得去出不來)
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
